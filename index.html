@@ -171,8 +171,23 @@ footer{border-top:1px solid var(--border);margin-top:36px;padding-top:18px}
 footer p{font:500 13px/20px var(--font-he);color:var(--n400);margin:0}
 
 @media(max-width:768px){
-  .hero h1{font-size:32px}
+  .inner{padding:0 14px}
+  .hero{padding:24px 16px 30px}
+  .hero h1{font-size:26px;line-height:1.2;margin-bottom:12px}
+  .hero .lead{font-size:15px;line-height:23px;margin-bottom:18px}
+  .hero-top{margin-bottom:18px}
+  .chip{padding:8px 12px;flex:1 1 calc(50% - 6px)}
+  .sec{gap:10px;margin:32px 0 14px}
+  .sec h2{font-size:20px;line-height:26px}
+  .badge{width:34px;height:34px;font-size:17px;border-radius:9px}
+  h3.sub3{font-size:16px;line-height:24px}
   .bcards,.calc-in,.calc-out,.sectors{grid-template-columns:1fr}
+  /* wide tables scroll horizontally instead of breaking the layout */
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
+  thead th,tbody td{padding:10px 11px}
+  tbody td.name{white-space:normal;min-width:200px}
+  .panel{padding:16px}
+  .callout,.warn{padding:14px 14px}
 }
 </style>
 </head>
