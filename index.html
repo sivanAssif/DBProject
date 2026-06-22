@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תוכנית פרויקט — מינוף נכס המידע (Tourism Data Monetization)</title>
+<style>
+  :root{
+    --bg:#0f1729; --panel:#16213e; --panel2:#1b2a4a; --ink:#eaf0ff; --muted:#9fb0d0;
+    --accent:#3ec6ff; --accent2:#7cf0c0; --warn:#ffb44d; --danger:#ff6b81;
+    --line:#27375e; --good:#4ade80;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#0b1120,#0f1729 40%);color:var(--ink);
+    font-family:"Segoe UI",system-ui,"Arial Hebrew",Arial,sans-serif;line-height:1.6}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
+  header.hero{padding:40px 28px;border-radius:20px;background:radial-gradient(120% 140% at 100% 0,#1c3a6e,#16213e);
+    border:1px solid var(--line);margin-bottom:28px}
+  .tag{display:inline-block;font-size:13px;letter-spacing:.5px;color:var(--accent2);
+    background:rgba(124,240,192,.1);border:1px solid rgba(124,240,192,.3);padding:4px 12px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:30px;margin:0 0 10px;line-height:1.25}
+  .sub{color:var(--muted);font-size:17px;max-width:760px}
+  .meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px;color:var(--muted);font-size:14px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+  h3{font-size:18px;margin:24px 0 8px;color:var(--accent)}
+  p{color:#d7e0f5}
+  .grid{display:grid;gap:16px}
+  .cards4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .card h4{margin:0 0 6px;font-size:16px}
+  .card .big{font-size:26px;font-weight:700;color:var(--accent2)}
+  .card small{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px;background:var(--panel);
+    border-radius:12px;overflow:hidden}
+  th,td{padding:11px 13px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--panel2);color:var(--accent);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600}
+  .p-low{background:rgba(74,222,128,.15);color:#7df0a8}
+  .p-mid{background:rgba(255,180,77,.15);color:#ffc878}
+  .p-high{background:rgba(255,107,129,.15);color:#ff97a6}
+  .callout{border-right:4px solid var(--warn);background:rgba(255,180,77,.08);padding:14px 18px;border-radius:10px;margin:16px 0}
+  .callout.danger{border-right-color:var(--danger);background:rgba(255,107,129,.08)}
+  .callout.good{border-right-color:var(--good);background:rgba(74,222,128,.08)}
+  /* gantt */
+  .gantt{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
+  .gantt table{margin:0;border-radius:0;min-width:760px}
+  .bar{height:18px;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));position:relative}
+  .gcell{padding:6px 4px}
+  /* model */
+  .model{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:14px}
+  .row{display:flex;align-items:center;gap:14px;margin:10px 0;flex-wrap:wrap}
+  .row label{flex:1;min-width:200px;color:#d7e0f5}
+  .row input[type=range]{flex:2;min-width:200px;accent-color:var(--accent)}
+  .row .val{width:120px;text-align:left;font-weight:700;color:var(--accent2)}
+  .total{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+  .total .t{flex:1;min-width:200px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+  .total .t .n{font-size:28px;font-weight:800;color:var(--accent2)}
+  .total .t small{color:var(--muted)}
+  .foot{margin-top:50px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
+  ul li{margin:6px 0}
+  .num{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">תוכנית פרויקט · גרסה 1.0 · יוני 2026</span>
+  <h1>מינוף נכס המידע — מסחור דאטה התיירות הלאומי</h1>
+  <p class="sub">תוכנית להפיכת ה-DB המאוחד (מידע התנהגותי על תיירות ונסיעות בישראל מכלל הלקוחות, 30 שנות היסטוריה) למקור הכנסה חוזר — דרך שירותי אנליטיקה ללקוחות קיימים ומכירת תובנות שוק לגופים חיצוניים.</p>
+  <div class="meta">
+    <span>מסמך עבור: <b>הנהלת החברה</b></span>
+    <span>אופק תכנון: <b>18 חודשים</b></span>
+    <span>תקציב כולל (שלב 0–2): <b>₪0.9M–₪1.6M</b></span>
+    <span>פוטנציאל הכנסה שנתי (שנה 2): <b>₪2.5M–₪5M+</b></span>
+  </div>
+</header>
+
+<section>
+  <h2>1 · התמצית — מה הנכס ומה אפשר למכור</h2>
+  <p>לחברה נכס ייחודי בשוק: בסיס נתונים מאוחד יחיד המכסה את כלל הלקוחות ומכיל מידע התנהגותי על תיירות ונסיעות בישראל, כולל היסטוריה של ~30 שנה (trend data נדיר). אף גוף אחר בשוק אינו מחזיק במידע המצרפי הזה. ארבעה מודלי הכנסה אפשריים:</p>
+  <table>
+    <tr><th>מודל</th><th>תיאור</th><th>מהירות לכסף</th><th>סיכון משפטי</th></tr>
+    <tr><td><b>1 · אנליטיקה ללקוחות קיימים</b></td><td>Benchmark — "איפה אתה ביחס לשוק". כל לקוח רואה רק את עצמו מול ממוצע אנונימי</td><td>מהיר (חודשים)</td><td><span class="pill p-low">נמוך</span></td></tr>
+    <tr><td><b>2 · דוחות Market Intelligence</b></td><td>דוחות מצרפיים אנונימיים לגופים חיצוניים (משרד התיירות, מלונות, תעופה, בנקים)</td><td>בינוני</td><td><span class="pill p-mid">בינוני</span></td></tr>
+    <tr><td><b>3 · Data-as-a-Service</b></td><td>מנוי שוטף לדשבורד/API עם תובנות בזמן אמת</td><td>בינוני–איטי</td><td><span class="pill p-mid">בינוני-גבוה</span></td></tr>
+    <tr><td><b>4 · רישוי דאטה גולמית</b></td><td>מכירת datasets לגופי מחקר ופיננסים</td><td>איטי</td><td><span class="pill p-high">גבוה מאוד</span></td></tr>
+  </table>
+  <div class="callout good"><b>אסטרטגיה מומלצת:</b> להתחיל ממודלים 1 ו-2. הם מייצרים הכנסה מהר, בסיכון נמוך, ובונים את התשתית (הטכנית והמשפטית) שתאפשר בהמשך את 3 ו-4.</div>
+</section>
+
+<section>
+  <h2>2 · החסם המכריע — הזכות המשפטית למסחר</h2>
+  <div class="callout danger">
+    <b>זה תנאי סף לכל הפרויקט.</b> ההבדל בין "להשתמש במידע ללקוחות שלי" לבין "לסחור במידע של כלל הלקוחות" הוא תהומי מבחינה משפטית. לפני השקעה כספית כלשהי בפיתוח, חובה לענות: <b>האם החוזים וה-Terms of Service מתירים שימוש משני בנתונים?</b>
+  </div>
+  <ul>
+    <li>מידע מזהה (שמות, דרכונים, אשראי) כפוף ל<b>חוק הגנת הפרטיות</b> (תיקון 13, 2025) ול-<b>GDPR</b> (כמעט בטוח שיש נוסעים אירופאים).</li>
+    <li>מידע <b>מצרפי ואנונימי אמיתי</b> ברוב המקרים מותר למסחר; מידע מזוהה או פסבדו-אנונימי — אסור ללא הסכמה מפורשת.</li>
+    <li><b>ברירת מחדל מומלצת:</b> אנונימיזציה מלאה בכל מוצר שיוצא החוצה.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>3 · שלבי הפרויקט, אחראים ותקציב</h2>
+
+  <h3>שלב 0 · היתכנות משפטית ומיפוי הנכס (חודש 1–2)</h3>
+  <table>
+    <tr><th>#</th><th>משימה</th><th>אחראי</th><th>למי לפנות</th><th>תקציב</th></tr>
+    <tr><td>0.1</td><td>סקירת חוזי לקוחות ו-ToS — מה הותר לשימוש משני</td><td>סמנכ"ל / יועמ"ש</td><td>עו"ד מסחרי</td><td class="num">₪25K</td></tr>
+    <tr><td>0.2</td><td>חוות דעת רגולטורית: חוק הגנת הפרטיות + GDPR</td><td>יועמ"ש</td><td>עו"ד פרטיות חיצוני</td><td class="num">₪40K</td></tr>
+    <tr><td>0.3</td><td>הגדרת מדיניות אנונימיזציה + מינוי DPO</td><td>CTO</td><td>יועץ אבטחת מידע</td><td class="num">₪20K</td></tr>
+    <tr><td>0.4</td><td>מיפוי הנכס: מה יש ב-DB, איכות, שדות זמינים</td><td>אנליסט נתונים</td><td>פנימי</td><td class="num">₪15K</td></tr>
+    <tr><td>0.5</td><td>החלטה אסטרטגית: בחירת 2 מודלים להתחלה</td><td>מנכ"ל + הנהלה</td><td>פנימי</td><td class="num">—</td></tr>
+    <tr><td colspan="4"><b>סה"כ שלב 0</b></td><td class="num"><b>₪100K</b></td></tr>
+  </table>
+
+  <h3>שלב 1 · Quick Win — Benchmark ללקוחות קיימים (חודש 2–5)</h3>
+  <table>
+    <tr><th>#</th><th>משימה</th><th>אחראי</th><th>תקציב</th></tr>
+    <tr><td>1.1</td><td>הגדרת 5–10 מדדי benchmark שלקוח ישלם עליהם</td><td>מנהל מוצר</td><td class="num">₪20K</td></tr>
+    <tr><td>1.2</td><td>בניית שכבת אגרגציה אנונימית מעל ה-DB</td><td>צוות פיתוח</td><td class="num">₪120K</td></tr>
+    <tr><td>1.3</td><td>Dashboard / דוח חודשי כ-add-on בתשלום</td><td>צוות פיתוח + UX</td><td class="num">₪100K</td></tr>
+    <tr><td>1.4</td><td>מודל תמחור והטמעה במערכת החיוב</td><td>כספים + מוצר</td><td class="num">₪15K</td></tr>
+    <tr><td>1.5</td><td>פיילוט עם 3–5 לקוחות אוהדים</td><td>הצלחת לקוח</td><td class="num">₪15K</td></tr>
+    <tr><td colspan="3"><b>סה"כ שלב 1</b></td><td class="num"><b>₪270K</b></td></tr>
+  </table>
+
+  <h3>שלב 2 · Market Intelligence לגופים חיצוניים (חודש 4–9)</h3>
+  <table>
+    <tr><th>#</th><th>משימה</th><th>אחראי</th><th>תקציב</th></tr>
+    <tr><td>2.1</td><td>בניית 2–3 דוחות "דגל" (רבעוני: תיירות פנים/חוץ)</td><td>אנליסט + מוצר</td><td class="num">₪80K</td></tr>
+    <tr><td>2.2</td><td>מודל תמחור: חד-פעמי / מנוי שנתי</td><td>כספים + BizDev</td><td class="num">₪10K</td></tr>
+    <tr><td>2.3</td><td>זיהוי 10 לקוחות יעד ראשונים + פגישות</td><td>BizDev</td><td class="num">₪40K</td></tr>
+    <tr><td>2.4</td><td>חוזה רישוי דאטה (Data License Agreement)</td><td>יועמ"ש</td><td class="num">₪30K</td></tr>
+    <tr><td>2.5</td><td>גיוס איש מכירות/BizDev ייעודי לדאטה (חצי שנה)</td><td>מנכ"ל</td><td class="num">₪180K</td></tr>
+    <tr><td colspan="3"><b>סה"כ שלב 2</b></td><td class="num"><b>₪340K</b></td></tr>
+  </table>
+
+  <div class="grid cards4" style="margin-top:18px">
+    <div class="card"><h4>שלב 0</h4><div class="big num">₪100K</div><small>היתכנות ומיפוי</small></div>
+    <div class="card"><h4>שלב 1</h4><div class="big num">₪270K</div><small>Benchmark ללקוחות</small></div>
+    <div class="card"><h4>שלב 2</h4><div class="big num">₪340K</div><small>Market Intelligence</small></div>
+    <div class="card"><h4>רזרבה + תקורה (~40%)</h4><div class="big num">₪290K</div><small>סיכון, גיוס, תשתית</small></div>
+  </div>
+  <div class="callout"><b>תקציב כולל מומלץ לשלב 0–2:</b> כ-<b>₪1M–₪1.6M</b> לאורך 9–12 חודשים. ההשקעה הקריטית ביותר היא שלב 0 — בלעדיו אין פרויקט.</div>
+</section>
+
+<section>
+  <h2>4 · ציר זמן (Gantt)</h2>
+  <div class="gantt">
+  <table>
+    <tr><th>שלב</th><th>ח׳1</th><th>ח׳2</th><th>ח׳3</th><th>ח׳4</th><th>ח׳5</th><th>ח׳6</th><th>ח׳7</th><th>ח׳8</th><th>ח׳9</th><th>ח׳10–18</th></tr>
+    <tr><td>שלב 0 · משפטי+מיפוי</td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td colspan="8"></td></tr>
+    <tr><td>שלב 1 · Benchmark</td><td></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td colspan="5"></td></tr>
+    <tr><td>שלב 2 · Market Intel</td><td colspan="3"></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td class="gcell"><div class="bar"></div></td><td></td></tr>
+    <tr><td>שלב 3 · DaaS (שנה 2)</td><td colspan="9"></td><td class="gcell"><div class="bar"></div></td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>5 · מודל הכנסות (אינטראקטיבי)</h2>
+  <p>שני זרמי הכנסה. גררו את המחוונים לפי ההנחות שלכם — התחזית מתעדכנת אוטומטית. <b>שנו את "מספר הלקוחות הכולל" למספר האמיתי שלכם.</b></p>
+
+  <div class="model">
+    <h3>זרם א׳ · Benchmark ללקוחות קיימים (הכנסה חוזרת)</h3>
+    <div class="row"><label>מספר לקוחות כולל</label><input type="range" id="custTotal" min="20" max="1000" step="10" value="200"><span class="val num" id="custTotalV"></span></div>
+    <div class="row"><label>אחוז מאמצים (conversion)</label><input type="range" id="conv" min="5" max="60" step="1" value="30"><span class="val num" id="convV"></span></div>
+    <div class="row"><label>מחיר ממוצע לחודש ללקוח (₪)</label><input type="range" id="price1" min="300" max="5000" step="100" value="1500"><span class="val num" id="price1V"></span></div>
+
+    <h3 style="margin-top:26px">זרם ב׳ · Market Intelligence (לקוחות מוסדיים)</h3>
+    <div class="row"><label>מספר לקוחות מוסדיים</label><input type="range" id="instN" min="0" max="50" step="1" value="12"><span class="val num" id="instNV"></span></div>
+    <div class="row"><label>מחיר ממוצע למנוי שנתי (₪)</label><input type="range" id="price2" min="30000" max="300000" step="10000" value="100000"><span class="val num" id="price2V"></span></div>
+
+    <div class="total">
+      <div class="t"><div class="n num" id="rev1">—</div><small>זרם א׳ — הכנסה שנתית</small></div>
+      <div class="t"><div class="n num" id="rev2">—</div><small>זרם ב׳ — הכנסה שנתית</small></div>
+      <div class="t"><div class="n num" id="revTotal">—</div><small>סה"כ הכנסה שנתית</small></div>
+    </div>
+    <p style="color:var(--muted);font-size:13px;margin-top:14px">* שולי הרווח של מוצרי דאטה גבוהים מאוד (70%–85%) — לאחר ההשקעה החד-פעמית, רוב ההכנסה היא רווח. ההנחות הן ברירת מחדל לדוגמה ויש לכייל אותן לנתוני החברה.</p>
+  </div>
+</section>
+
+<section>
+  <h2>6 · למי לפנות — מפת לקוחות יעד (שלב 2)</h2>
+  <div class="grid cards4">
+    <div class="card"><h4>סקטור ציבורי</h4><small>משרד התיירות, הלמ"ס, רשות שדות התעופה — צמאים לדאטה לתכנון מדיניות</small></div>
+    <div class="card"><h4>מלונאות</h4><small>פתאל, ישרוטל, דן, רשת אטלס — לתכנון תפוסה ותמחור</small></div>
+    <div class="card"><h4>תעופה</h4><small>אל על, ארקיע, ישראייר — תכנון מסלולים וביקושים</small></div>
+    <div class="card"><h4>פיננסים</h4><small>בנקים וקרנות — תיירות כ-alternative data / אינדיקטור כלכלי</small></div>
+    <div class="card"><h4>מחקר וייעוץ</h4><small>BDO, דלויט, נילסן — שותפי הפצה אפשריים</small></div>
+    <div class="card"><h4>נדל"ן מסחרי</h4><small>קניונים ורשתות קמעונאות — דפוסי תנועה תיירותית</small></div>
+  </div>
+</section>
+
+<section>
+  <h2>7 · הצעדים המיידיים (השבועיים הקרובים)</h2>
+  <table>
+    <tr><th>#</th><th>פעולה</th><th>אחראי</th></tr>
+    <tr><td>1</td><td>קביעת פגישה עם עו"ד פרטיות — שאלת השימוש המשני (חסם #1)</td><td>מנכ"ל / יועמ"ש</td></tr>
+    <tr><td>2</td><td>מיפוי ראשוני של ה-DB — מה יש ובאיזו איכות</td><td>אנליסט נתונים</td></tr>
+    <tr><td>3</td><td>בחירת 3 לקוחות אוהדים לפיילוט Benchmark</td><td>הצלחת לקוח</td></tr>
+    <tr><td>4</td><td>מינוי בעל הנכס בחברה (Project Owner)</td><td>הנהלה</td></tr>
+  </table>
+</section>
+
+<div class="foot">
+  תוכנית פרויקט · מינוף נכס המידע · גרסה 1.0 · יוני 2026. מסמך זה הוא תוכנית אסטרטגית ראשונית; ההערכות הכספיות הן הנחות עבודה לכיול מול נתוני החברה, ואינן מהוות ייעוץ משפטי. כל פעילות מסחור מותנית בחוות דעת משפטית (שלב 0).
+</div>
+
+</div>
+
+<script>
+  function fmt(n){return '₪'+Math.round(n).toLocaleString('en-US');}
+  const ids=['custTotal','conv','price1','instN','price2'];
+  function calc(){
+    const custTotal=+custTotal_.value, conv=+conv_.value, price1=+price1_.value;
+    const instN=+instN_.value, price2=+price2_.value;
+    custTotalV.textContent=custTotal.toLocaleString();
+    convV.textContent=conv+'%';
+    price1V.textContent=fmt(price1);
+    instNV.textContent=instN;
+    price2V.textContent=fmt(price2);
+    const r1=custTotal*(conv/100)*price1*12;
+    const r2=instN*price2;
+    rev1.textContent=fmt(r1);
+    rev2.textContent=fmt(r2);
+    revTotal.textContent=fmt(r1+r2);
+  }
+  const custTotal_=document.getElementById('custTotal');
+  const conv_=document.getElementById('conv');
+  const price1_=document.getElementById('price1');
+  const instN_=document.getElementById('instN');
+  const price2_=document.getElementById('price2');
+  [custTotal_,conv_,price1_,instN_,price2_].forEach(el=>el.addEventListener('input',calc));
+  calc();
+</script>
+</body>
+</html>
