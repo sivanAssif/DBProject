@@ -117,7 +117,7 @@ h3.sub3{font:700 18px/26px var(--font-he);color:var(--n1000);margin:24px 0 10px}
 
 /* ───────── Gantt ───────── */
 .panel{background:var(--card);border-radius:10px;box-shadow:var(--sh-card);padding:20px 22px}
-.gantt-scroll{overflow-x:auto}
+.gantt-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .gantt{display:grid;grid-template-columns:170px repeat(18,minmax(26px,1fr));gap:4px;align-items:center;min-width:680px}
 .gantt .mhead{font:600 11px var(--font);direction:ltr;text-align:center;color:var(--n500)}
 .gantt .glabel{font:500 13px var(--font-he);color:var(--n800);grid-column:1}
@@ -187,8 +187,13 @@ footer p{font:500 13px/20px var(--font-he);color:var(--n400);margin:0}
   table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
   thead th,tbody td{padding:10px 11px}
   tbody td.name{white-space:normal;min-width:200px}
-  .panel{padding:16px}
+  .panel{padding:16px 14px}
   .callout,.warn{padding:14px 14px}
+  /* Gantt: narrower label column + smaller cells so it scrolls cleanly */
+  .gantt{min-width:600px;grid-template-columns:110px repeat(18,minmax(22px,1fr))}
+  .gantt .glabel,.gantt .gmonths-label{font-size:11px;line-height:15px}
+  .legend{gap:10px}
+  .legend span{font-size:12px}
 }
 </style>
 </head>
