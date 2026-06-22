@@ -348,7 +348,7 @@ footer p{font:500 13px/20px var(--font-he);color:var(--n400);margin:0}
     </div>
     <div class="calc-card">
       <h4>זרם ב׳ · Market Intelligence (גופים חיצוניים)</h4>
-      <p class="note" style="border-top:none;margin:-6px 0 6px;padding-top:0">הקהל: קונים חדשים — משרד התיירות, מלונות, תעופה, בנקים. דוח מצרפי אנונימי. לא תלוי במספר הסוכנויות.</p>
+      <p class="note" style="border-top:none;margin:-6px 0 6px;padding-top:0">הקהל: קונים חדשים — משרד התיירות, מלונות, בנקים ואשראי. דוח מצרפי אנונימי. לא תלוי במספר הסוכנויות. <b>מספר הגופים הוא הערכה ראשונית שטרם נבדקה — לאמת בשלב 2.</b></p>
       <div class="sld">
         <div class="sld-top"><span class="lab">מספר גופים חיצוניים מנויים</span><span class="cur" id="c_instV"></span></div>
         <input type="range" id="c_inst" min="0" max="25" step="1">
@@ -371,7 +371,7 @@ footer p{font:500 13px/20px var(--font-he);color:var(--n400);margin:0}
   <div class="sectors">
     <div class="sector"><h4>סקטור ציבורי</h4><p>משרד התיירות, הלמ"ס, רשות שדות התעופה — צמאים לדאטה לתכנון מדיניות.</p></div>
     <div class="sector"><h4>מלונאות</h4><p>פתאל, ישרוטל, דן, רשת אטלס — לתכנון תפוסה ותמחור.</p></div>
-    <div class="sector"><h4>תעופה</h4><p>אל על, ארקיע, ישראייר — תכנון מסלולים וניתוח ביקושים.</p></div>
+    <div class="sector"><h4>כרטיסי אשראי וביטוח נסיעות</h4><p>חברות אשראי ומבטחים — דפוסי הוצאה ונסיעה לתמחור ולמוצרים.</p></div>
     <div class="sector"><h4>פיננסים</h4><p>בנקים וקרנות — תיירות כ‑alternative data ואינדיקטור כלכלי.</p></div>
     <div class="sector"><h4>מחקר וייעוץ</h4><p>BDO, דלויט, נילסן — שותפי הפצה ולקוחות אפשריים.</p></div>
     <div class="sector"><h4>נדל"ן מסחרי</h4><p>קניונים ורשתות קמעונאות — ניתוח דפוסי תנועה תיירותית.</p></div>
@@ -397,9 +397,9 @@ footer p{font:500 13px/20px var(--font-he);color:var(--n400);margin:0}
 
 <script>
   var S={
-    cons:[120,15,1000,3,60000],
-    base:[120,30,1500,6,100000],
-    aggr:[150,45,2200,12,150000]
+    cons:[120,10,1200,2,60000],
+    base:[120,15,1800,4,100000],
+    aggr:[150,30,2500,8,150000]
   };
   var el=function(id){return document.getElementById(id)};
   var tot=el('c_tot'),conv=el('c_conv'),price=el('c_price'),inst=el('c_inst'),annual=el('c_annual');
